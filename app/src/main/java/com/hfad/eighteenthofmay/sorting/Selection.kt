@@ -3,7 +3,7 @@ package com.hfad.eighteenthofmay.sorting
 class Selection {
     companion object {
 
-        fun sort(list: MutableList<Int>) {
+        fun sort(list: MutableList<Float>) {
             val s = list.size
             for (i in 0 until s) {
                 var min = i
@@ -14,7 +14,7 @@ class Selection {
             }
         }
 
-        private fun exchange(list: MutableList<Int>, i: Int, j: Int) {
+        private fun exchange(list: MutableList<Float>, i: Int, j: Int) {
             val t = list[i]
             list[i] = list[j]
             list[j] = t

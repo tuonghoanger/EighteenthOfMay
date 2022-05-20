@@ -9,30 +9,29 @@ import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.HandlerCompat
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hfad.eighteenthofmay.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
+import kotlinx.coroutines.Runnable
 import kotlin.random.Random
 
-
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
     private lateinit var shapeAdapter: ShapeAdapter
+    private val text by lazy { findViewById<TextView>(R.id.text) }
     private val button by lazy { findViewById<Button>(R.id.button) }
+    private val sortButton by lazy { findViewById<Button>(R.id.sort_button) }
     private val one by lazy { findViewById<View>(R.id.blue) }
     private val two by lazy { findViewById<View>(R.id.blue2) }
     private val three by lazy { findViewById<View>(R.id.blue3) }
     private val seekBar by lazy { findViewById<SeekBar>(R.id.seekBar) }
-    var listChangeable = true
+    private val listSort by lazy { findViewById<RecyclerView>(R.id.list_sort) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.activity_main)
 
         seekBar.max = 100
         seekBar.min = 5
@@ -46,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                val x = "we have ${binding.seekBar.progress}"
-                binding.text.text = x
+                val x = "we have ${seekBar.progress}"
+                text.text = x
                 createListSort(progress)
             }
         })
         shapeAdapter = ShapeAdapter(30)
-        binding.listSort.apply {
+        listSort.apply {
             adapter = shapeAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             rotationX = 180f
@@ -65,39 +64,51 @@ class MainActivity : AppCompatActivity() {
 
         var i = 0
         button.setOnClickListener {
-            button.isEnabled = false
-            seekBar.isEnabled = false
-            i = 0
-            val mainHandler = Handler(Looper.getMainLooper())
-
-            mainHandler.post(object : Runnable {
-                override fun run() {
-                    if (i<shapeAdapter.itemCount)   {
-                        binding.listSort.getChildAt(i++).setBackgroundResource(R.color.teal_200)
-                        mainHandler.postDelayed(this, 150)
-                    }
-                    else {
-                        for (j in 0 until  shapeAdapter.itemCount) {
-                            binding.listSort.getChildAt(j).setBackgroundResource(R.color.blue)
-                        }
-                        button.isEnabled = true
-                        seekBar.isEnabled = true
-                    }
-                }
-            })
+//            button.isEnabled = false
+//            seekBar.isEnabled = false
+//            i = 0
+//            val mainHandler = Handler(Looper.getMainLooper())
+//
+//            mainHandler.post(object : Runnable {
+//                override fun run() {
+//                    if (i > 0) listSort.getChildAt(i - 1).setBackgroundResource(R.color.blue)
+//                    if (i < shapeAdapter.itemCount) {
+//                        listSort.getChildAt(i++).setBackgroundResource(R.color.teal_200)
+//                        mainHandler.postDelayed(this, 100)
+//                    } else {
+//                        button.isEnabled = true
+//                        seekBar.isEnabled = true
+//                    }
+//                }
+//            })
 
         }
 
-        binding.sortButton.setOnClickListener {
 
+        sortButton.setOnClickListener {
+//            Selection.sort(shapeAdapter.listNum)
+//            shapeAdapter.notifyDataSetChanged()
+            sortButton.isEnabled = false
+            seekBar.isEnabled = false
+            Thread {
+                try {
+                    (0 until shapeAdapter.itemCount).forEach {
+                        if (it > 0) listSort.getChildAt(it - 1).setBackgroundResource(R.color.blue)
+                        listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
+                        Thread.sleep(60)
+                    }
+                    sortButton.isEnabled = true
+                    seekBar.isEnabled = true
+                } catch (e: Exception) {
+                }
+            }.start()
 
         }
 
     }
 
 
-
-    fun changeScale(view : View){
+    fun changeScale(view: View) {
         view.apply {
             pivotY = height.toFloat()
             scaleY = Random.nextFloat()
@@ -112,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 
     fun createListSort(count: Int) {
         shapeAdapter = ShapeAdapter(count)
-        binding.listSort.apply {
+        listSort.apply {
             adapter = shapeAdapter
         }
 
