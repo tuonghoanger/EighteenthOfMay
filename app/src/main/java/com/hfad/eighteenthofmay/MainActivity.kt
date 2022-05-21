@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
-import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -90,18 +92,19 @@ class MainActivity : AppCompatActivity() {
 //            shapeAdapter.notifyDataSetChanged()
             sortButton.isEnabled = false
             seekBar.isEnabled = false
-            Thread {
-                try {
-                    (0 until shapeAdapter.itemCount).forEach {
-                        if (it > 0) listSort.getChildAt(it - 1).setBackgroundResource(R.color.blue)
-                        listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
-                        Thread.sleep(60)
-                    }
-                    sortButton.isEnabled = true
-                    seekBar.isEnabled = true
-                } catch (e: Exception) {
+
+            MainScope().launch {
+                for (j in 0 until shapeAdapter.itemCount){
+                    listSort.getChildAt(j).setBackgroundResource(R.color.teal_200)
+                    delay(100)
+                    listSort.getChildAt(j).setBackgroundResource(R.color.blue)
                 }
-            }.start()
+
+                sortButton.isEnabled = true
+                seekBar.isEnabled = true
+            }
+
+
 
         }
 
