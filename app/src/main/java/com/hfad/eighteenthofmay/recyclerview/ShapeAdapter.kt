@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.R
-import kotlin.random.Random as Random
+import kotlin.random.Random
 
 class ShapeAdapter(val count : Int) : RecyclerView.Adapter<ShapeAdapter.ShapeViewHolder?>() {
     val listNum = List(count) { Random.nextFloat() } as MutableList<Float>
@@ -32,7 +32,6 @@ class ShapeAdapter(val count : Int) : RecyclerView.Adapter<ShapeAdapter.ShapeVie
                 scaleY = height
             }
         }
-
     }
 
 }

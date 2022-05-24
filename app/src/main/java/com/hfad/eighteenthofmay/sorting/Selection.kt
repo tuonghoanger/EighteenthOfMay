@@ -1,26 +1,22 @@
 package com.hfad.eighteenthofmay.sorting
 
-import android.util.Log
-import android.view.View
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.R
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
-class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val complete: Sorting.OnComplete) : Sorting {
+class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val notifyUI: Sorting.OnComplete) : Sorting {
     private val listSize = adapter.listNum.size
+    private val listNum = adapter.listNum
 
     override fun sort() {
         MainScope().launch {
             for (i in 0 until listSize) {
                 val min = findMin(i)
-                exchange(adapter.listNum, i, min)
+                exchange(listNum, i, min)
                 updateList(i, min)
             }
-            complete.updateUI()
+            notifyUI.updateUI()
         }
     }
 
@@ -28,7 +24,7 @@ class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val compl
         adapter.notifyItemChanged(i)
         delay(10)
         adapter.notifyItemChanged(min)
-        delay(269)
+        delay(267)
         listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)
         listSort.getChildAt(i).animation?.cancel()
         delay(10)
@@ -38,13 +34,16 @@ class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val compl
         var min = start
         blink(listSort.getChildAt(min))
         for (j in start + 1 until listSize) {
-            blink(listSort.getChildAt(j))
-            delay(60)
-            if (adapter.listNum[j] < adapter.listNum[min]) {
+         //   blink(listSort.getChildAt(j))
+            listSort.getChildAt(j).setBackgroundResource(R.color.yellow)
+            delay(37)
+            if (listNum[j] < listNum[min]) {
                 stopBlink(listSort.getChildAt(min))
                 min = j
+                blink(listSort.getChildAt(min))
             }
-            else stopBlink(listSort.getChildAt(j))
+            else listSort.getChildAt(j).setBackgroundResource(R.color.blue)
+              //  stopBlink(listSort.getChildAt(j))
         }
         return min
     }

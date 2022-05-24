@@ -13,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
+import com.hfad.eighteenthofmay.sorting.Insertion
 import com.hfad.eighteenthofmay.sorting.Selection
 import com.hfad.eighteenthofmay.sorting.Sorting
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivity() : AppCompatActivity() , Sorting.OnComplete{
@@ -28,12 +31,14 @@ class MainActivity() : AppCompatActivity() , Sorting.OnComplete{
     private val three by lazy { findViewById<View>(R.id.blue3) }
     private val seekBar by lazy { findViewById<SeekBar>(R.id.seekBar) }
     private val listSort by lazy { findViewById<RecyclerView>(R.id.list_sort) }
+    private val increase by lazy { findViewById<TextView>(R.id.increase) }
+    private val decrease by lazy { findViewById<TextView>(R.id.decrease) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        seekBar.max = 100
+        seekBar.max = 85
         seekBar.min = 5
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
@@ -58,17 +63,25 @@ class MainActivity() : AppCompatActivity() , Sorting.OnComplete{
             rotationX = 180f
         }
 
+        increase.setOnClickListener {
+            seekBar.progress++
+        }
+
+        decrease.setOnClickListener {
+            seekBar.progress--
+        }
+
         newList.setOnClickListener {
           createListSort(seekBar.progress)
-         //   blink(one)
+
         }
 
         sortButton.setOnClickListener {
             seekBar.isEnabled = false
             sortButton.isEnabled = false
             newList.isEnabled = false
-            sortList(Selection(listSort,shapeAdapter,this))
-            one.animation?.cancel()
+            sortList(Insertion(listSort,shapeAdapter,this))
+ //           shapeAdapter.notifyDataSetChanged()
         }
 
     }
