@@ -24,7 +24,7 @@ class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
         adapter.notifyItemChanged(i)
         delay(10)
         adapter.notifyItemChanged(min)
-        delay(267)
+        delay(270)
         listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)
         listSort.getChildAt(i).animation?.cancel()
         delay(10)
@@ -36,7 +36,7 @@ class Selection(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
         for (j in start + 1 until listSize) {
          //   blink(listSort.getChildAt(j))
             listSort.getChildAt(j).setBackgroundResource(R.color.yellow)
-            delay(37)
+            delay(60)
             if (listNum[j] < listNum[min]) {
                 stopBlink(listSort.getChildAt(min))
                 min = j

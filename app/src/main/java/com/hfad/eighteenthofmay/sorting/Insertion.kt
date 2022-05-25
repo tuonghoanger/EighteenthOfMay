@@ -32,7 +32,7 @@ class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
     private suspend fun paint(){
             (0 until listSize).forEach {
                 listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
-                delay(10)
+                delay(5)
             }
     }
 

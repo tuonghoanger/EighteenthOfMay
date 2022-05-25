@@ -1,5 +1,9 @@
 package com.hfad.eighteenthofmay.recyclerview
 
+import android.content.Context
+import android.util.DisplayMetrics
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.R
 import kotlin.random.Random
 
-class ShapeAdapter(val count : Int) : RecyclerView.Adapter<ShapeAdapter.ShapeViewHolder?>() {
+class ShapeAdapter(val count : Int,val context : Context, val totalWidth : Float ) : RecyclerView.Adapter<ShapeAdapter.ShapeViewHolder?>() {
     val listNum = List(count) { Random.nextFloat() } as MutableList<Float>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShapeViewHolder {
@@ -31,6 +35,10 @@ class ShapeAdapter(val count : Int) : RecyclerView.Adapter<ShapeAdapter.ShapeVie
             rectangle.apply {
                 scaleY = height
             }
+         // val x = (totalWidth-2*2-0.5*2*count)/count
+//            val x = (totalWidth-2*2)/(0.5*2*count)
+//            val a = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x.toFloat(), context.resources.displayMetrics)
+//            rectangle.layoutParams.width = a.toInt()
         }
     }
 
