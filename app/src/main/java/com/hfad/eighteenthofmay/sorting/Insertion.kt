@@ -7,7 +7,11 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notifyUI: Sorting.OnComplete): Sorting {
+class Insertion(
+    val listSort: RecyclerView,
+    val adapter: ShapeAdapter,
+    val notifyUI: Sorting.OnComplete
+) : Sorting {
     private val listSize = adapter.listNum.size
     private val listNum = adapter.listNum
 
@@ -21,7 +25,7 @@ class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
                     j--
                 }
                 listNum[j] = item
-                updateList(j,i-j+1)
+                updateList(j, i - j + 1)
             }
             delay(350)
             paint()
@@ -29,16 +33,16 @@ class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
         }
     }
 
-    private suspend fun paint(){
-            (0 until listSize).forEach {
-                listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
-                delay(5)
-            }
+    private suspend fun paint() {
+        (0 until listSize).forEach {
+            listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
+            delay(5)
+        }
     }
 
-    private suspend fun updateList(start: Int,itemCount : Int ) {
-        adapter.notifyItemRangeChanged(start,itemCount)
-        delay(200)
+    private suspend fun updateList(start: Int, itemCount: Int) {
+        adapter.notifyItemRangeChanged(start, itemCount)
+        delay(50)
     }
 
 }

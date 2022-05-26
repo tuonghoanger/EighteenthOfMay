@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.R
 import kotlin.random.Random
 
-class ShapeAdapter(val count : Int,val context : Context, val totalWidth : Float ) : RecyclerView.Adapter<ShapeAdapter.ShapeViewHolder?>() {
+class ShapeAdapter(val count: Int, val context: Context, val totalWidth: Float) : RecyclerView.Adapter<ShapeAdapter.ShapeViewHolder?>() {
     val listNum = List(count) { Random.nextFloat() } as MutableList<Float>
+    val widthEach = (totalWidth - 2 * 2) / (0.5 * 2 * count)
+    val toPixel = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, widthEach.toFloat(), context.resources.displayMetrics)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShapeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rectangle_shape,parent,false)
@@ -35,10 +37,7 @@ class ShapeAdapter(val count : Int,val context : Context, val totalWidth : Float
             rectangle.apply {
                 scaleY = height
             }
-         // val x = (totalWidth-2*2-0.5*2*count)/count
-//            val x = (totalWidth-2*2)/(0.5*2*count)
-//            val a = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x.toFloat(), context.resources.displayMetrics)
-//            rectangle.layoutParams.width = a.toInt()
+            rectangle.layoutParams.width = (toPixel).toInt() - 2
         }
     }
 

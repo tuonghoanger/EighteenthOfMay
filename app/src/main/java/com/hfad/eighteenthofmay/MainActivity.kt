@@ -2,6 +2,7 @@ package com.hfad.eighteenthofmay
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Insets
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.SeekBar
@@ -54,7 +55,7 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
 
         seekBar.max = ((dpWidth-2*2)/(0.5*2*5)).toInt()
         seekBar.min = 6
-        seekBar.progress = 30
+        seekBar.progress = 6
 
         val width = "width : $dpWidth"
         info.text = width
@@ -105,7 +106,7 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
             sortButton.isEnabled = false
             newList.isEnabled = false
             sortButton.setTextColor(ContextCompat.getColor(this, R.color.purple))
-            sortList(Selection(listSort, shapeAdapter, this))
+            sortList(Insertion(listSort, shapeAdapter, this))
         }
 
     }
