@@ -32,7 +32,6 @@ class ShapeAdapter(val count: Int, val context: Context, val totalWidth: Float) 
 
     inner class ShapeViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val rectangle by lazy { view.findViewById<FrameLayout>(R.id.rectangle) }
-
         fun bind(height : Float) {
             rectangle.apply {
                 scaleY = height

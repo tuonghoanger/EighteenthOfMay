@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:id="@+id/seek_and_sort"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -39,14 +39,12 @@
         </LinearLayout>
 
         <SeekBar
-            android:layout_margin="15dp"
+            android:layout_margin="25dp"
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <include
-            android:id="@+id/sort_type"
-            layout="@layout/sort_type" />
+        <include layout="@layout/sort_type" />
 
         <LinearLayout
             android:layout_margin="10dp"

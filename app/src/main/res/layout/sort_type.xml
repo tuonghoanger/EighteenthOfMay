@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Selection sort"
+            android:text="Selection Sort"
             />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Insertion sort"
+            android:text="Insertion Sort"
             />
 
         <TextView
@@ -40,13 +40,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Bubble sort"
+            android:text="Bubble Sort"
             />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Heap sort"
+            android:text="Heap Sort"
             />
         <TextView
             android:textStyle="bold"
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Merge sort"
+            android:text="Merge Sort"
             />
 
         <TextView
@@ -78,13 +78,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Quick sort"
+            android:text="Quick Sort"
             />
 
-
-
     </LinearLayout>
-
-
 
 </LinearLayout>

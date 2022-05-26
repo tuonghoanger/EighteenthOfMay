@@ -7,11 +7,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Insertion(
-    val listSort: RecyclerView,
-    val adapter: ShapeAdapter,
-    val notifyUI: Sorting.OnComplete
-) : Sorting {
+class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notifyUI: Sorting.OnComplete) : Sorting {
     private val listSize = adapter.listNum.size
     private val listNum = adapter.listNum
 

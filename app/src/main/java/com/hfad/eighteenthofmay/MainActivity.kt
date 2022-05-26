@@ -5,9 +5,11 @@ import android.graphics.Color
 import android.graphics.Insets
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,30 +24,25 @@ import kotlin.random.Random
 class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
 
     private lateinit var shapeAdapter: ShapeAdapter
-
-    //  private val text by lazy { findViewById<TextView>(R.id.text) }
-    private val newList by lazy { findViewById<TextView>(R.id.button) }
+    private val newList    by lazy { findViewById<TextView>(R.id.button) }
     private val sortButton by lazy { findViewById<TextView>(R.id.sort_button) }
 
-    private val seekBar by lazy { findViewById<SeekBar>(R.id.seekBar) }
+    private val seekBar  by lazy { findViewById<SeekBar>(R.id.seekBar) }
     private val listSort by lazy { findViewById<RecyclerView>(R.id.list_sort) }
     private val increase by lazy { findViewById<TextView>(R.id.increase) }
     private val decrease by lazy { findViewById<TextView>(R.id.decrease) }
 
     private val selection by lazy { findViewById<TextView>(R.id.selection) }
     private val insertion by lazy { findViewById<TextView>(R.id.insertion) }
-    private val bubble by lazy { findViewById<TextView>(R.id.bubble) }
-    private val heap by lazy { findViewById<TextView>(R.id.heap) }
-    private val merge by lazy { findViewById<TextView>(R.id.merge) }
-    private val quick by lazy { findViewById<TextView>(R.id.quick) }
-
-//    private val one by lazy { findViewById<View>(R.id.blue) }
-//    private val two by lazy { findViewById<View>(R.id.blue2) }
-//    private val three by lazy { findViewById<View>(R.id.blue3) }
+    private val bubble    by lazy { findViewById<TextView>(R.id.bubble) }
+    private val heap      by lazy { findViewById<TextView>(R.id.heap) }
+    private val merge     by lazy { findViewById<TextView>(R.id.merge) }
+    private val quick     by lazy { findViewById<TextView>(R.id.quick) }
+    private var sortType  = ""
 
     private val displayMetrics: DisplayMetrics by lazy { applicationContext.resources.displayMetrics }
     private val dpHeight: Float by lazy { displayMetrics.heightPixels / displayMetrics.density }
-    private val dpWidth: Float by lazy { displayMetrics.widthPixels / displayMetrics.density }
+    private val dpWidth : Float by lazy { displayMetrics.widthPixels / displayMetrics.density }
 
     private val info: TextView by lazy { findViewById<TextView>(R.id.info) }
 
@@ -53,6 +50,7 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
 
+        sortButton.isEnabled = false
         seekBar.max = ((dpWidth-2*2)/(0.5*2*5)).toInt()
         seekBar.min = 6
         seekBar.progress = 6
@@ -84,7 +82,6 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
                         return false
                     }
                 }
-
             rotationX = 180f
         }
 
@@ -98,7 +95,18 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
 
         newList.setOnClickListener {
               createListSort(seekBar.progress)
+        }
 
+        val listSortType : List<TextView> = listOf(selection,insertion,bubble,heap,merge,quick)
+        listSortType.forEach { textView ->
+            textView.setOnClickListener{
+                sortButton.isEnabled = true
+                sortType = textView.text.toString()
+                listSortType.forEach { textSort ->
+                    if (textSort==it) textSort.setTextColor(ContextCompat.getColor(this, R.color.purple))
+                    else textSort.setTextColor(TextView(this).textColors)
+                }
+            }
         }
 
         sortButton.setOnClickListener {
@@ -106,9 +114,15 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
             sortButton.isEnabled = false
             newList.isEnabled = false
             sortButton.setTextColor(ContextCompat.getColor(this, R.color.purple))
-            sortList(Insertion(listSort, shapeAdapter, this))
+            when (sortType) {
+                "Selection Sort" -> sortList(Selection(listSort, shapeAdapter, this))
+                "Insertion Sort" -> sortList(Insertion(listSort, shapeAdapter, this))
+                "Bubble Sort"    -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Heap Sort"      -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Merge Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Quick Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+            }
         }
-
     }
 
     private fun sortList(sortMethod: Sorting) {
@@ -122,17 +136,11 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
         newList.isEnabled = true
     }
 
-    fun getRandomColor(): Int {
-        val rnd = Random
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-    }
-
     fun createListSort(count: Int) {
         shapeAdapter = ShapeAdapter(count, this, dpWidth)
         listSort.apply {
             adapter = shapeAdapter
         }
-
     }
 
 }
