@@ -7,21 +7,26 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notifyUI: Sorting.OnComplete) : Sorting {
-    private val listSize = adapter.listNum.size
-    private val listNum = adapter.listNum
+class Insertion(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnComplete) : Sort(listSort,adapter,notifyUI)  {
+    val speed : Long = if(listSize<11) 400 else if (listSize in 11..19) 150 else if (listSize in 21..39) 10 else 1
 
     override fun sort() {
         MainScope().launch {
             for (i in 1 until listSize) {
-                val item = listNum[i]
+                listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)
                 var j = i
-                while (j > 0 && item < listNum[j - 1]) {
-                    listNum[j] = listNum[j - 1]
+                while (j > 0 && listNum[j] < listNum[j - 1]) {
+                //    stopBlink(listSort.getChildAt(j))
+                    listSort.getChildAt(j).setBackgroundResource(R.color.blue)
+                    exchange(listNum, j, j-1)
+                    updateList(j,j-1)
+                    listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)  // not to repeat
                     j--
+                //    blink(listSort.getChildAt(j))
+                    delay(speed)
                 }
-                listNum[j] = item
-                updateList(j, i - j + 1)
+                listSort.getChildAt(i).setBackgroundResource(R.color.blue)
+                stopBlink(listSort.getChildAt(j))
             }
             delay(350)
             paint()
@@ -29,16 +34,13 @@ class Insertion(val listSort: RecyclerView, val adapter: ShapeAdapter, val notif
         }
     }
 
-    private suspend fun paint() {
-        (0 until listSize).forEach {
-            listSort.getChildAt(it).setBackgroundResource(R.color.teal_200)
-            delay(5)
-        }
-    }
-
     private suspend fun updateList(start: Int, itemCount: Int) {
-        adapter.notifyItemRangeChanged(start, itemCount)
-        delay(50)
+//        adapter.notifyItemRangeChanged(start, itemCount)
+//        delay(40)
+        adapter.notifyItemChanged(start)
+        delay(10)
+        adapter.notifyItemChanged(itemCount)
+        delay(265)
     }
 
 }

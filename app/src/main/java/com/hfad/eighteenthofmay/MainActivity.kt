@@ -1,11 +1,7 @@
 package com.hfad.eighteenthofmay
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.Insets
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
@@ -17,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
 import com.hfad.eighteenthofmay.sorting.Insertion
 import com.hfad.eighteenthofmay.sorting.Selection
-import com.hfad.eighteenthofmay.sorting.Sorting
-import kotlin.random.Random
+import com.hfad.eighteenthofmay.sorting.Sort
 
-
-class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
+class MainActivity() : AppCompatActivity(), Sort.OnComplete {
 
     private lateinit var shapeAdapter: ShapeAdapter
     private val newList    by lazy { findViewById<TextView>(R.id.button) }
@@ -125,7 +119,7 @@ class MainActivity() : AppCompatActivity(), Sorting.OnComplete {
         }
     }
 
-    private fun sortList(sortMethod: Sorting) {
+    private fun sortList(sortMethod: Sort) {
         sortMethod.sort()
     }
 
