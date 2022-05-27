@@ -29,7 +29,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
     private val selection by lazy { findViewById<TextView>(R.id.selection) }
     private val insertion by lazy { findViewById<TextView>(R.id.insertion) }
     private val bubble    by lazy { findViewById<TextView>(R.id.bubble) }
-    private val heap      by lazy { findViewById<TextView>(R.id.heap) }
+    private val heap      by lazy { findViewById<TextView>(R.id.shell) }
     private val merge     by lazy { findViewById<TextView>(R.id.merge) }
     private val quick     by lazy { findViewById<TextView>(R.id.quick) }
     private var sortType  = ""
@@ -97,7 +97,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
                 sortButton.isEnabled = true
                 sortType = textView.text.toString()
                 listSortType.forEach { textSort ->
-                    if (textSort==it) textSort.setTextColor(ContextCompat.getColor(this, R.color.purple))
+                    if (textSort==it) textSort.setTextColor(ContextCompat.getColor(this, R.color.sort_color))
                     else textSort.setTextColor(TextView(this).textColors)
                 }
             }
