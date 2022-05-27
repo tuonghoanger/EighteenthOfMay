@@ -40,7 +40,7 @@ class Insertion(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnCo
         adapter.notifyItemChanged(start)
         delay(10)
         adapter.notifyItemChanged(itemCount)
-        delay(265)
+        delay(269)
     }
 
 }

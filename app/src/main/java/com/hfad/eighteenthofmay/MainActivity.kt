@@ -112,7 +112,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
                 "Selection Sort" -> sortList(Selection(listSort, shapeAdapter, this))
                 "Insertion Sort" -> sortList(Insertion(listSort, shapeAdapter, this))
                 "Bubble Sort"    -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
-                "Heap Sort"      -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Shell Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
                 "Merge Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
                 "Quick Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
             }
