@@ -2,7 +2,7 @@
 <FrameLayout
     android:transformPivotY="0dp"
     android:id="@+id/rectangle"
-    android:background="@drawable/rect_bg"
+    android:background="@color/blue"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="0.5dp"
     android:layout_width="51.66dp"

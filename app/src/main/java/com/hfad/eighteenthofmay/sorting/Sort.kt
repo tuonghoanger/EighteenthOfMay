@@ -12,7 +12,6 @@ abstract class Sort(val listSort: RecyclerView, val adapter: ShapeAdapter, val n
     val listNum  = adapter.listNum
     val listSize = adapter.listNum.size
 
-
     open fun sort(){ }
 
     fun exchange(list: MutableList<Float>, i: Int, j: Int) {
