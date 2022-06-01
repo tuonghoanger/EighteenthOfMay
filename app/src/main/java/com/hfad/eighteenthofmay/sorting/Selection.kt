@@ -6,7 +6,7 @@ import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
 import kotlinx.coroutines.*
 
 class Selection(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnComplete) : Sort(listSort,adapter,notifyUI) {
-    val speed : Long = if(listSize<11) 500 else if (listSize in 11..19) 200 else if (listSize in 21..39) 50 else 20
+    val speed : Long = if(listSize<11) 500 else if (listSize in 11..20) 200 else if (listSize in 21..39) 50 else 15
 
     override fun sort() {
         MainScope().launch {
@@ -23,7 +23,7 @@ class Selection(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnCo
         adapter.notifyItemChanged(i)
         delay(10)
         adapter.notifyItemChanged(min)
-        delay(265)
+        delay(269)
         listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)
         listSort.getChildAt(i).animation?.cancel()
     }
