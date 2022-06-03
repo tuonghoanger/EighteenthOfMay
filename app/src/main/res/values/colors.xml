@@ -13,4 +13,5 @@
     <color name="light_purple">#e9e8fa</color>
     <color name="main_bg">#f5f4eb</color>
     <color name="sort_color">#6b13c6</color>
+    <color name="sort_color_pressed">#e4f3f9</color>
 </resources>

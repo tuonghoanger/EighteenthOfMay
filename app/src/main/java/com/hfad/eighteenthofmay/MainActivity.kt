@@ -2,6 +2,7 @@ package com.hfad.eighteenthofmay
 
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
@@ -23,8 +24,8 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
 
     private val seekBar  by lazy { findViewById<SeekBar>(R.id.seekBar) }
     private val listSort by lazy { findViewById<RecyclerView>(R.id.list_sort) }
-    private val increase by lazy { findViewById<TextView>(R.id.increase) }
-    private val decrease by lazy { findViewById<TextView>(R.id.decrease) }
+    private val increase by lazy { findViewById<View>(R.id.increase) }
+    private val decrease by lazy { findViewById<View>(R.id.decrease) }
 
     private val selection by lazy { findViewById<TextView>(R.id.selection) }
     private val insertion by lazy { findViewById<TextView>(R.id.insertion) }
@@ -97,8 +98,14 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
                 sortButton.isEnabled = true
                 sortType = textView.text.toString()
                 listSortType.forEach { textSort ->
-                    if (textSort==it) textSort.setTextColor(ContextCompat.getColor(this, R.color.sort_color))
-                    else textSort.setTextColor(TextView(this).textColors)
+                    if (textSort==it) {
+                        textSort.setTextColor(ContextCompat.getColor(this, R.color.sort_color_pressed))
+                        textSort.setBackgroundResource(R.drawable.sort_bg_pressed)
+                    }
+                    else {
+                        textSort.setTextColor(TextView(this).textColors)
+                        textSort.setBackgroundResource(R.drawable.sort_background)
+                    }
                 }
             }
         }
