@@ -1,91 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/main_bg"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/seek_and_sort"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="@string/new_array"
                 android:id="@+id/button"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:gravity="center"
+                android:text="@string/new_array"
+                android:textStyle="bold" />
 
             <TextView
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="@string/sort"
                 android:id="@+id/sort_button"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:gravity="center"
+                android:text="@string/sort"
+                android:textStyle="bold" />
 
         </LinearLayout>
-
-        <SeekBar
-            android:layout_margin="25dp"
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:textSize="10sp"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:id="@+id/info"
-            android:text="info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:layout_margin="10dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:gravity="center"
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/sort_info"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:contentDescription="@string/sort"
+                android:src="@drawable/sort_info" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="4" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="info"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <View
                     android:id="@+id/increase"
-                    android:background="@drawable/increase"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:background="@drawable/increase" />
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <View
                     android:id="@+id/decrease"
-                    android:background="@drawable/decrease"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:background="@drawable/decrease" />
 
             </LinearLayout>
 
         </LinearLayout>
+
         <include layout="@layout/sort_type" />
 
     </LinearLayout>
@@ -94,9 +117,9 @@
         android:id="@+id/list_sort"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="15dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

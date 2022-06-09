@@ -3,4 +3,18 @@
     <string name="sort">SORT!</string>
     <string name="another">another</string>
     <string name="new_array">Generate New Array</string>
+    <string name="selection">One of the simplest sorting algorithms works as follows: First, find the smallest item in the array and exchange it with the first entry
+        (itself if the first entry is already the smallest). Then, find the next smallest item and exchange it with the second entry. Continue in this way until the entire
+        array is sorted. This method is called selection sort because it works by repeatedly selecting the smallest remaining item.</string>
+    <string name="insertion">Consider the cards one at a time, inserting each into its proper place among those already considered (keeping them sorted).
+        In a computer implementation, we need to make space to insert the current item by moving larger items one position to the right,
+        before inserting the current item into the vacated position. </string>
+    <string name="bubble">Transfer the biggest number to the last position</string>
+    <string name="shell">The idea is to rearrange the array to give it the property that taking every hth entry (starting anywhere) yields a sorted subsequence.
+        Such an array is said to be h-sorted. Put another way, an h-sorted array is h independent sorted subsequences, interleaved together.
+        By h-sorting for some large values of h, we can move items in the array long distances and thus make it easier to h-sort for smaller values of h.
+        Using such a procedure for any sequence of values of h that ends in 1 will produce a sorted array</string>
+    <string name="merge">Combining 2 ordered arrays to make one larger ordered array. This operation immediately leads to a simple recursive sort method known as mergesort :
+        to sort an array, divide it into two halves, sort the two halves (recursively), and then merge the results.</string>
+    <string name="quick">Pick a pivot , split array to 2 sides of the pivot, bigger than and smaller than, do it recursively</string>
 </resources>

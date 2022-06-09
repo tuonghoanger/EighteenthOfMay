@@ -1,20 +1,25 @@
 package com.hfad.eighteenthofmay
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
 import com.hfad.eighteenthofmay.sorting.Insertion
 import com.hfad.eighteenthofmay.sorting.Selection
 import com.hfad.eighteenthofmay.sorting.Sort
+
 
 class MainActivity() : AppCompatActivity(), Sort.OnComplete {
 
@@ -33,13 +38,15 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
     private val heap      by lazy { findViewById<TextView>(R.id.shell) }
     private val merge     by lazy { findViewById<TextView>(R.id.merge) }
     private val quick     by lazy { findViewById<TextView>(R.id.quick) }
+    lateinit var listSortType : List<TextView>
     private var sortType  = ""
 
     private val displayMetrics: DisplayMetrics by lazy { applicationContext.resources.displayMetrics }
     private val dpHeight: Float by lazy { displayMetrics.heightPixels / displayMetrics.density }
     private val dpWidth : Float by lazy { displayMetrics.widthPixels / displayMetrics.density }
 
-    private val info: TextView by lazy { findViewById<TextView>(R.id.info) }
+    private val numCount by lazy { findViewById<TextView>(R.id.info) }
+    private val sortInfo by lazy { findViewById<ImageView>(R.id.sort_info) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +58,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
         seekBar.progress = 6
 
         val width = "width : $dpWidth"
-        info.text = width
+        numCount.text = width
 
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
@@ -64,7 +71,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val x = "list contains $progress nums"
-                info.text = x
+                numCount.text = x
                 createListSort(progress)
             }
         })
@@ -92,9 +99,10 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
               createListSort(seekBar.progress)
         }
 
-        val listSortType : List<TextView> = listOf(selection,insertion,bubble,heap,merge,quick)
+        listSortType = listOf(selection,insertion,bubble,heap,merge,quick)
         listSortType.forEach { textView ->
             textView.setOnClickListener{
+                sortInfo.isVisible = true
                 sortButton.isEnabled = true
                 sortType = textView.text.toString()
                 listSortType.forEach { textSort ->
@@ -110,10 +118,19 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
             }
         }
 
+        sortInfo.setOnClickListener {
+            sortDialog(sortType)
+        }
+
         sortButton.setOnClickListener {
             seekBar.isEnabled = false
             sortButton.isEnabled = false
             newList.isEnabled = false
+            increase.isEnabled = false
+            decrease.isEnabled = false
+            listSortType.forEach {
+                it.isEnabled = false
+            }
             sortButton.setTextColor(ContextCompat.getColor(this, R.color.purple))
             when (sortType) {
                 "Selection Sort" -> sortList(Selection(listSort, shapeAdapter, this))
@@ -126,6 +143,21 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
         }
     }
 
+    private fun sortDialog(sortMethod: String){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(sortMethod)
+        when (sortType) {
+            "Selection Sort" -> builder.setMessage(R.string.selection)
+            "Insertion Sort" -> builder.setMessage(R.string.insertion)
+            "Bubble Sort"    -> builder.setMessage(R.string.bubble)
+            "Shell Sort"     -> builder.setMessage(R.string.shell)
+            "Merge Sort"     -> builder.setMessage(R.string.merge)
+            "Quick Sort"     -> builder.setMessage(R.string.quick)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
     private fun sortList(sortMethod: Sort) {
         sortMethod.sort()
     }
@@ -135,6 +167,11 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
         sortButton.isEnabled = true
         sortButton.setTextColor(TextView(this).textColors)
         newList.isEnabled = true
+        increase.isEnabled = true
+        decrease.isEnabled = true
+        listSortType.forEach {
+            it.isEnabled = true
+        }
     }
 
     fun createListSort(count: Int) {
