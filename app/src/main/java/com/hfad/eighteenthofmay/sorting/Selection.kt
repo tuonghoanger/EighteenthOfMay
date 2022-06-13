@@ -23,7 +23,7 @@ class Selection(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnCo
         adapter.notifyItemChanged(i)
         delay(10)
         adapter.notifyItemChanged(min)
-        delay(269)
+        delay(267)
         listSort.getChildAt(i).setBackgroundResource(R.color.teal_200)
         listSort.getChildAt(i).animation?.cancel()
     }

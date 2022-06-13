@@ -16,9 +16,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.eighteenthofmay.recyclerview.ShapeAdapter
-import com.hfad.eighteenthofmay.sorting.Insertion
-import com.hfad.eighteenthofmay.sorting.Selection
-import com.hfad.eighteenthofmay.sorting.Sort
+import com.hfad.eighteenthofmay.sorting.*
 
 
 class MainActivity() : AppCompatActivity(), Sort.OnComplete {
@@ -135,8 +133,8 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
             when (sortType) {
                 "Selection Sort" -> sortList(Selection(listSort, shapeAdapter, this))
                 "Insertion Sort" -> sortList(Insertion(listSort, shapeAdapter, this))
-                "Bubble Sort"    -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
-                "Shell Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Bubble Sort"    -> sortList(Bubble(listSort, shapeAdapter, this))
+                "Shell Sort"     -> sortList(Shell(listSort, shapeAdapter, this))
                 "Merge Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
                 "Quick Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
             }
