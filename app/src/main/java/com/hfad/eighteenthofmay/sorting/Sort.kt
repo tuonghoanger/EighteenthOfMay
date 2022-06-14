@@ -13,6 +13,7 @@ abstract class Sort(val listSort: RecyclerView, val adapter: ShapeAdapter, val n
     val listSize = adapter.listNum.size
 
     open fun sort(){ }
+    open fun speedSort(){ }
 
     fun exchange(list: MutableList<Float>, i: Int, j: Int) {
         val t = list[i]

@@ -19,6 +19,28 @@ class Selection(listSort: RecyclerView,adapter: ShapeAdapter,notifyUI: Sort.OnCo
         }
     }
 
+    override fun speedSort() {
+        MainScope().launch {
+            for (i in 0 until listSize) {
+                var min = i
+                for (j in i until listSize){
+                    delay(3)
+                    if (listNum[j] < listNum[min]) {
+                        min = j
+                    }
+                }
+                exchange(listNum, i, min)
+                adapter.notifyItemChanged(i)
+                delay(7)
+                adapter.notifyItemChanged(min)
+                delay(7)
+            }
+            delay(370)
+            paint()
+            notifyUI.updateUI()
+        }
+    }
+
     private suspend fun updateList(i: Int, min: Int) {
         adapter.notifyItemChanged(i)
         delay(10)

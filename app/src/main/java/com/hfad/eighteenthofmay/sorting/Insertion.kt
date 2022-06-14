@@ -37,6 +37,26 @@ class Insertion(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.On
         }
     }
 
+    override fun speedSort() {
+        MainScope().launch {
+            for (i in 1 until listSize) {
+                var j = i
+                while (j > 0 && listNum[j] < listNum[j - 1]) {
+                    exchange(listNum, j, j - 1)
+                    adapter.notifyItemChanged(j)
+                    delay(3)
+                    adapter.notifyItemChanged(j-1)
+                    delay(3)
+                    j--
+                    delay(7)
+                }
+            }
+            delay(370)
+            paint()
+            notifyUI.updateUI()
+        }
+    }
+
     private suspend fun updateList(start: Int, itemCount: Int) {
         adapter.notifyItemChanged(start)
         delay(10)

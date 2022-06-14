@@ -24,9 +24,29 @@ class Bubble(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.OnCom
                     }
                     listSort.getChildAt(j).setBackgroundResource(R.color.blue)
                 }
-
             }
             listSort.getChildAt(0).setBackgroundResource(R.color.teal_200)
+            notifyUI.updateUI()
+        }
+    }
+
+    override fun speedSort() {
+        val n = listNum.count() // = numbers in list so last num index is n-1
+        MainScope().launch {
+            for (i in n - 1 downTo 0) {
+                for (j in 0 until i) {
+                    if (listNum[j] > listNum[j + 1]) {
+                        exchange(listNum, j, j + 1)
+                        adapter.notifyItemChanged(i)
+                        delay(3)
+                        adapter.notifyItemChanged(j)
+                        delay(3)
+                    }
+                    delay(7)
+                }
+            }
+            delay(370)
+            paint()
             notifyUI.updateUI()
         }
     }

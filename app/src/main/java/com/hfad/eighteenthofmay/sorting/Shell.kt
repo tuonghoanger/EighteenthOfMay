@@ -8,8 +8,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class Shell(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.OnComplete) : Sort(listSort,adapter,notifyUI) {
-    val speed: Long = if (listSize < 11) 200 else if (listSize in 11..19) 100 else 1
-    var isIthTeal = false
 
     override fun sort() {
         val n: Int = listNum.size
@@ -31,6 +29,32 @@ class Shell(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.OnComp
                 h /= 3
             }
             delay(300)
+            paint()
+            notifyUI.updateUI()
+        }
+    }
+
+    override fun speedSort() {
+        val n: Int = listNum.size
+        var h = 1
+        while (h < n / 3) h = 3 * h + 1  // 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ...
+        MainScope().launch {
+            while (h >= 1) {
+                for (i in h until n) {
+                    var j = i
+                    while (j >= h && listNum[j] < listNum[j - h]) {
+                        exchange(listNum, j, j - h)
+                        adapter.notifyItemChanged(j)
+                        delay(15)
+                        adapter.notifyItemChanged(j-h)
+                        delay(15)
+                        j -= h
+                        delay(15)
+                    }
+                }
+                h /= 3
+            }
+            delay(370)
             paint()
             notifyUI.updateUI()
         }

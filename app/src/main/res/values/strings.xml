@@ -13,7 +13,9 @@
     <string name="shell">The idea is to rearrange the array to give it the property that taking every hth entry (starting anywhere) yields a sorted subsequence.
         Such an array is said to be h-sorted. Put another way, an h-sorted array is h independent sorted subsequences, interleaved together.
         By h-sorting for some large values of h, we can move items in the array long distances and thus make it easier to h-sort for smaller values of h.
-        Using such a procedure for any sequence of values of h that ends in 1 will produce a sorted array</string>
+        Using such a procedure for any sequence of values of h that ends in 1 will produce a sorted array . In this app , i use 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, …
+        or (3^k-1)/2 , not greater than N/3 .
+    </string>
     <string name="merge">Combining 2 ordered arrays to make one larger ordered array. This operation immediately leads to a simple recursive sort method known as mergesort :
         to sort an array, divide it into two halves, sort the two halves (recursively), and then merge the results.</string>
     <string name="quick">Pick a pivot , split array to 2 sides of the pivot, bigger than and smaller than, do it recursively</string>

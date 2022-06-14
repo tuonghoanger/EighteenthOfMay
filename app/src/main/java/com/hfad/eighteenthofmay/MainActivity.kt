@@ -1,7 +1,9 @@
 package com.hfad.eighteenthofmay
 
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.ImageView
@@ -25,17 +27,19 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
     private val newList    by lazy { findViewById<TextView>(R.id.button) }
     private val sortButton by lazy { findViewById<TextView>(R.id.sort_button) }
 
-    private val seekBar  by lazy { findViewById<SeekBar>(R.id.seekBar) }
-    private val listSort by lazy { findViewById<RecyclerView>(R.id.list_sort) }
-    private val increase by lazy { findViewById<View>(R.id.increase) }
-    private val decrease by lazy { findViewById<View>(R.id.decrease) }
+    private val seekBar   by lazy { findViewById<SeekBar>(R.id.seekBar)    }
+    private val listSort  by lazy { findViewById<RecyclerView>(R.id.list_sort) }
+    private val increase  by lazy { findViewById<ImageView>(R.id.increase) }
+    private val decrease  by lazy { findViewById<ImageView>(R.id.decrease) }
+    private val speedMode by lazy { findViewById<ImageView>(R.id.speed)    }
+    var isSpeedOn = false
 
     private val selection by lazy { findViewById<TextView>(R.id.selection) }
     private val insertion by lazy { findViewById<TextView>(R.id.insertion) }
-    private val bubble    by lazy { findViewById<TextView>(R.id.bubble) }
-    private val heap      by lazy { findViewById<TextView>(R.id.shell) }
-    private val merge     by lazy { findViewById<TextView>(R.id.merge) }
-    private val quick     by lazy { findViewById<TextView>(R.id.quick) }
+    private val bubble    by lazy { findViewById<TextView>(R.id.bubble)    }
+    private val heap      by lazy { findViewById<TextView>(R.id.shell)     }
+    private val merge     by lazy { findViewById<TextView>(R.id.merge)     }
+    private val quick     by lazy { findViewById<TextView>(R.id.quick)     }
     lateinit var listSortType : List<TextView>
     private var sortType  = ""
 
@@ -120,12 +124,26 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
             sortDialog(sortType)
         }
 
+        speedMode.setOnClickListener {
+            if (!isSpeedOn){
+                isSpeedOn = !isSpeedOn
+                speedMode.setColorFilter(ContextCompat.getColor(this, R.color.purple))
+                Toast.makeText(this,"Speed Mode is On",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                isSpeedOn = !isSpeedOn
+                speedMode.setColorFilter(ContextCompat.getColor(this, R.color.blue))
+                Toast.makeText(this,"Speed Mode is Off",Toast.LENGTH_SHORT).show()
+            }
+        }
+
         sortButton.setOnClickListener {
             seekBar.isEnabled = false
             sortButton.isEnabled = false
             newList.isEnabled = false
             increase.isEnabled = false
             decrease.isEnabled = false
+            speedMode.isEnabled = false
             listSortType.forEach {
                 it.isEnabled = false
             }
@@ -157,7 +175,8 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
     }
 
     private fun sortList(sortMethod: Sort) {
-        sortMethod.sort()
+        if (isSpeedOn) sortMethod.speedSort()
+        else sortMethod.sort()
     }
 
     override fun updateUI() {
@@ -167,6 +186,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
         newList.isEnabled = true
         increase.isEnabled = true
         decrease.isEnabled = true
+        speedMode.isEnabled = true
         listSortType.forEach {
             it.isEnabled = true
         }
