@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EighteenthOfMay</string>
+    <string name="app_name">Algorithm Visualization</string>
     <string name="sort">SORT!</string>
     <string name="another">another</string>
     <string name="new_array">Generate New Array</string>

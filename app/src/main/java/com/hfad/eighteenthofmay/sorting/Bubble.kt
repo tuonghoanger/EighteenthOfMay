@@ -38,9 +38,9 @@ class Bubble(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.OnCom
                     if (listNum[j] > listNum[j + 1]) {
                         exchange(listNum, j, j + 1)
                         adapter.notifyItemChanged(i)
-                        delay(3)
+                        delay(1)
                         adapter.notifyItemChanged(j)
-                        delay(3)
+                        delay(1)
                     }
                     delay(7)
                 }

@@ -44,9 +44,9 @@ class Insertion(listSort: RecyclerView, adapter: ShapeAdapter, notifyUI: Sort.On
                 while (j > 0 && listNum[j] < listNum[j - 1]) {
                     exchange(listNum, j, j - 1)
                     adapter.notifyItemChanged(j)
-                    delay(3)
+                    delay(1)
                     adapter.notifyItemChanged(j-1)
-                    delay(3)
+                    delay(1)
                     j--
                     delay(7)
                 }
