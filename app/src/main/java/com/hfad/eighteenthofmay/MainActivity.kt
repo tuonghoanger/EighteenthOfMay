@@ -2,6 +2,7 @@ package com.hfad.eighteenthofmay
 
 import android.content.DialogInterface
 import android.content.res.Resources
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.DisplayMetrics
@@ -104,7 +105,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
         listSortType = listOf(selection,insertion,bubble,heap,merge,quick)
         listSortType.forEach { textView ->
             textView.setOnClickListener{
-                sortInfo.isVisible = true
+                sortInfo.visibility = View.VISIBLE
                 sortButton.isEnabled = true
                 sortType = textView.text.toString()
                 listSortType.forEach { textSort ->
@@ -154,7 +155,7 @@ class MainActivity() : AppCompatActivity(), Sort.OnComplete {
                 "Bubble Sort"    -> sortList(Bubble(listSort, shapeAdapter, this))
                 "Shell Sort"     -> sortList(Shell(listSort, shapeAdapter, this))
                 "Merge Sort"     -> sortList(Merge(this,listSort, shapeAdapter, this))
-                "Quick Sort"     -> Toast.makeText(this,"not yet",Toast.LENGTH_SHORT).show()
+                "Quick Sort"     -> Toast.makeText(this,"Not yet implemented. Sorry!!",Toast.LENGTH_SHORT).show()
             }
         }
     }

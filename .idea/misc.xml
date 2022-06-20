@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/EighteenthOfMay/app/src/main/res/layout/activity_main.xml" value="0.34057971014492755" />
+        <entry key="app/src/main/res/drawable/decrease.xml" value="0.2835" />
+        <entry key="app/src/main/res/drawable/increase.xml" value="0.2835" />
+        <entry key="app/src/main/res/drawable/sort_info.xml" value="0.2835" />
+        <entry key="app/src/main/res/drawable/speed.xml" value="0.2835" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/main_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/rectangle_shape.xml" value="0.2246376811594203" />
